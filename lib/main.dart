@@ -1,5 +1,3 @@
-import 'package:deteccion_plantas/Pages/ArPage.dart';
-import 'package:deteccion_plantas/Pages/CamaraPage.dart';
 import 'package:deteccion_plantas/Pages/Welcome.dart';
 import 'package:flutter/material.dart';
 

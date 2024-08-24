@@ -1,5 +1,6 @@
 import 'package:deteccion_plantas/Pages/CamaraPage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -10,7 +11,10 @@ class WelcomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.green[200]!, Colors.green[800]!],
+            colors: [
+              Color(0xFF200122), // Color #200122
+              Color(0xFF6f0000), // Color #6f0000
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -22,27 +26,34 @@ class WelcomePage extends StatelessWidget {
               // Título
               Text(
                 'Detector de Plantas',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                style: GoogleFonts.archivoNarrow(
+                  textStyle: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
-              // Icono de plantas
+
+              //gif
               Image.asset(
-                'assets/images/plantas.gif', // Asegúrate de que la ruta sea correcta
-                width: 100, // Ajusta el tamaño según sea necesario
+                'assets/images/plantas.gif',
+                width: 100,
                 height: 100,
               ),
               SizedBox(height: 20),
+
               // Nombres de los autores
               Text(
                 'Luis Burbano\nSteven Pozo',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
+                style: GoogleFonts.archivoNarrow(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 textAlign: TextAlign.center,
               ),
