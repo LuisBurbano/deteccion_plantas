@@ -77,11 +77,15 @@ class ScanController extends GetxController {
 
       // Si la confianza es mayor al 45%, actualizamos la etiqueta
       if (ourDetectedObject['confidence'] * 100 > 45) {
+        // Extraemos solo el nombre de la planta
         label = ourDetectedObject['label'].toString();
+        // También puedes agregar un `log` para depuración si lo deseas
+        log("Nombre de la planta detectada: $label");
       }
 
       // Llamamos a update para actualizar la UI
       update();
     }
   }
+
 }

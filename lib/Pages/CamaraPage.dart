@@ -11,12 +11,21 @@ class CamaraPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.black,
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF200122), // Color #200122
-              Color(0xFF6f0000), // Color #6f0000
+              Color(0xFF0A0A0A),
+              Color(0xFF0A0A0A),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -25,48 +34,50 @@ class CamaraPage extends StatelessWidget {
         child: GetBuilder<ScanController>(
           init: ScanController(),
           builder: (controller) {
+            final cleanedLabel = _cleanPlantLabel(controller.label);
             return controller.isCameraInitialized.value
                 ? Stack(
               children: [
                 Center(
                   child: CameraPreview(controller.cameraController),
                 ),
-                if (controller.label.isNotEmpty)
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.7,
-                    left: 20,
-                    right: 20,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Esta es una ${controller.label}",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                            ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.67,
+                  left: 20,
+                  right: 20,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Esta es una $cleanedLabel",
+                          style: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
                           ),
+                        ),
+                        if (controller.label != "ninguna planta detectada")
                           IconButton(
                             icon: Icon(Icons.explore, color: Colors.white),
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PlantDetailPage(planta: controller.label),
+                                  builder: (context) => PlantDetailPage(planta: cleanedLabel),
                                 ),
                               );
                             },
                           ),
-                        ],
-                      ),
+                      ],
                     ),
                   ),
+                ),
               ],
             )
                 : const Center(child: Text("Cargando..."));
@@ -75,4 +86,10 @@ class CamaraPage extends StatelessWidget {
       ),
     );
   }
+
+  String _cleanPlantLabel(String label) {
+    // Eliminar números y espacios al principio del texto
+    return label.replaceFirst(RegExp(r'^\d+\s*'), '');
+  }
 }
+

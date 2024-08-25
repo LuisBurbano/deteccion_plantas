@@ -1,2 +1,3 @@
-0 Rosas
-1 Girasol
+0 Girasol
+1 Gerbera
+2 Rosa
